@@ -74,7 +74,7 @@ export const ConsentForms: React.FC<ConsentFormsProps> = ({ onBack, currentRoom,
          </div>
 
          {/* Editor Toolbar */}
-         <div className="bg-[#f8f9fa] border-b border-gray-200 p-2.5 flex flex-wrap gap-x-6 gap-y-3">
+         <div className="bg-[#f8f9fa] border border-gray-200 p-2.5 flex flex-wrap gap-x-6 gap-y-3">
             <ToolbarGroup>
                <ToolbarIcon icon="fa-scissors" />
                <ToolbarIcon icon="fa-copy" />
@@ -134,10 +134,13 @@ export const ConsentForms: React.FC<ConsentFormsProps> = ({ onBack, currentRoom,
 
          {/* Editor Area */}
          <div className="flex-1 bg-white p-12 overflow-y-auto custom-scrollbar">
+            {/* 
+                Fix: Removed invalid 'placeholder' attribute from div to resolve TypeScript compilation error.
+                The placeholder attribute is not standard for div elements and causes a type mismatch in React.
+            */}
             <div 
                contentEditable 
                className="w-full h-full outline-none text-[15px] leading-relaxed text-gray-800 min-h-[600px]"
-               placeholder="Begin designing your consent form template here..."
             >
             </div>
          </div>

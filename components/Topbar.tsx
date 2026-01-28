@@ -38,7 +38,7 @@ export const Topbar: React.FC<TopbarProps> = ({ onToggleSidebar }) => {
   }, []);
 
   return (
-    <header className="h-10 bg-[#212529] text-gray-300 flex items-center justify-end px-4 gap-6 border-b border-black/20">
+    <header className="h-10 bg-[#0d1b2a] text-blue-100 flex items-center justify-end px-4 gap-6 border-b border-blue-950 shadow-sm z-50">
       <div className="flex items-center gap-5">
         
         {/* Connection Status Indicator */}
@@ -54,15 +54,15 @@ export const Topbar: React.FC<TopbarProps> = ({ onToggleSidebar }) => {
             <span className={`relative inline-flex rounded-full h-3 w-3 transition-colors duration-500 ${
               dbStatus === 'connected' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.7)]' : 
               dbStatus === 'offline' ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.7)]' : 
-              'bg-gray-600'
+              'bg-blue-900/60'
             }`}></span>
           </div>
 
           {/* Label */}
-          <span className={`text-[10px] font-bold uppercase tracking-tight leading-none transition-colors duration-500 ${
-            dbStatus === 'connected' ? 'text-green-500' : dbStatus === 'offline' ? 'text-red-500' : 'text-gray-500'
+          <span className={`text-[10px] font-black uppercase tracking-widest leading-none transition-colors duration-500 ${
+            dbStatus === 'connected' ? 'text-green-500' : dbStatus === 'offline' ? 'text-red-500' : 'text-blue-400'
           }`}>
-            {dbStatus === 'connected' ? 'Database Connected' : dbStatus === 'offline' ? 'Database Offline' : 'Verifying...'}
+            {dbStatus === 'connected' ? 'Live' : dbStatus === 'offline' ? 'Offline' : 'Syncing...'}
           </span>
 
           {/* Tooltip for error debugging */}
@@ -73,24 +73,26 @@ export const Topbar: React.FC<TopbarProps> = ({ onToggleSidebar }) => {
           )}
         </div>
 
-        <div className="w-px h-4 bg-gray-700 mx-1"></div>
+        <div className="w-px h-4 bg-blue-900/50 mx-1"></div>
 
-        <div className="cursor-pointer hover:text-white transition-colors">
+        <div className="cursor-pointer text-blue-300/60 hover:text-white transition-colors">
           <i className="fa-solid fa-microphone-slash text-xs"></i>
         </div>
-        <div className="cursor-pointer hover:text-white transition-colors">
-          <i className="fa-solid fa-user-circle"></i>
+        <div className="cursor-pointer text-blue-300/60 hover:text-white transition-colors">
+          <i className="fa-solid fa-circle-user text-lg"></i>
         </div>
-        <div className="cursor-pointer hover:text-white relative group transition-colors">
+        <div className="cursor-pointer text-blue-300/60 hover:text-white relative group transition-colors">
           <i className="fa-solid fa-bell"></i>
-          <span className="absolute -top-1.5 -right-2 bg-[#dc3545] text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full border border-[#212529] font-bold">0</span>
+          <span className="absolute -top-1.5 -right-2 bg-rose-600 text-white text-[8px] w-3.5 h-3.5 flex items-center justify-center rounded-full border border-[#0d1b2a] font-black">0</span>
         </div>
-        <div className="cursor-pointer hover:text-white transition-colors">
-          <i className="fa-solid fa-comment"></i>
+        <div className="cursor-pointer text-blue-300/60 hover:text-white transition-colors">
+          <i className="fa-solid fa-comment-dots"></i>
         </div>
-        <div className="flex items-center gap-2 cursor-pointer group hover:text-white transition-colors">
-          <i className="fa-solid fa-user-circle text-gray-300 group-hover:text-white"></i>
-          <i className="fa-solid fa-chevron-down text-[9px]"></i>
+        <div className="flex items-center gap-2 cursor-pointer group hover:bg-blue-900/20 px-2 py-1 rounded transition-colors">
+          <div className="w-6 h-6 bg-blue-950 rounded-full flex items-center justify-center border border-blue-800/40">
+            <i className="fa-solid fa-user text-blue-400 text-[10px]"></i>
+          </div>
+          <i className="fa-solid fa-chevron-down text-[8px] text-blue-400 group-hover:text-white"></i>
         </div>
       </div>
     </header>

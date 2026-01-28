@@ -142,12 +142,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onNavigate, currentVie
   if (!isOpen) return null;
 
   return (
-    <aside className="w-64 bg-[#212529] text-gray-300 flex flex-col border-r border-gray-800 h-full select-none">
-      <div className="h-10 px-3 flex items-center gap-2 bg-[#212529]">
-        <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
+    <aside className="w-64 bg-[#0d1b2a] text-gray-300 flex flex-col border-r border-blue-900/30 h-full select-none shadow-2xl">
+      <div className="h-10 px-3 flex items-center gap-2 bg-[#0d1b2a]">
+        <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/20">
           <i className="fa-solid fa-h text-white text-[10px]"></i>
         </div>
-        <span className="text-sm font-semibold tracking-tight text-gray-200">
+        <span className="text-sm font-bold tracking-tight text-white uppercase opacity-90">
           Haven MIS
         </span>
       </div>
@@ -157,7 +157,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onNavigate, currentVie
           <input 
             type="text" 
             placeholder="Find a panel"
-            className="w-full bg-white text-xs py-1.5 px-3 rounded-sm border-none focus:outline-none text-gray-800 placeholder-gray-400"
+            className="w-full bg-blue-900/20 text-xs py-1.5 px-3 rounded-md border border-blue-800/30 focus:outline-none text-blue-100 placeholder-blue-400 focus:bg-blue-900/40 transition-all shadow-inner"
           />
         </div>
       </div>
@@ -165,29 +165,29 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onNavigate, currentVie
       <nav className="flex-1 overflow-y-auto custom-scrollbar pt-1">
         <div 
           onClick={() => { onNavigate('dashboard'); setActiveItemId(null); }}
-          className={`flex items-center gap-3 px-3 py-2 hover:bg-[#343a40] cursor-pointer transition-colors ${currentView === 'dashboard' ? 'text-white bg-[#343a40]' : 'text-gray-400'}`}
+          className={`flex items-center gap-3 px-3 py-2 hover:bg-blue-900/30 cursor-pointer transition-all ${currentView === 'dashboard' ? 'text-white bg-blue-800/40 border-r-4 border-blue-500' : 'text-blue-200/60'}`}
         >
-          <i className={`fa-solid fa-home text-center text-xs w-4 ${currentView === 'dashboard' ? 'text-white' : 'text-slate-400'}`}></i>
-          <span className="text-[13px] font-medium">Home</span>
+          <i className={`fa-solid fa-home text-center text-xs w-4 ${currentView === 'dashboard' ? 'text-white' : 'text-blue-400/80'}`}></i>
+          <span className="text-[13px] font-bold uppercase tracking-wide">Home</span>
         </div>
 
         {SIDEBAR_ITEMS.filter(item => item.id !== 'home').map((item) => (
           <div key={item.id} className="mb-0.5">
             <div 
               onClick={() => toggleExpand(item.id)}
-              className={`flex items-center justify-between px-3 py-2 hover:bg-[#343a40] cursor-pointer transition-colors ${activeItemId === item.id ? 'text-white bg-[#343a40]' : 'text-gray-400'}`}
+              className={`flex items-center justify-between px-3 py-2 hover:bg-blue-900/30 cursor-pointer transition-all ${activeItemId === item.id ? 'text-white bg-blue-900/40' : 'text-blue-200/60'}`}
             >
               <div className="flex items-center gap-3">
-                <i className={`fa-solid ${item.icon} w-4 text-center text-xs ${activeItemId === item.id ? 'text-white' : (item.color || 'text-gray-400')}`}></i>
-                <span className="text-[13px] font-medium">{item.label}</span>
+                <i className={`fa-solid ${item.icon} w-4 text-center text-xs ${activeItemId === item.id ? 'text-white shadow-[0_0_8px_rgba(255,255,255,0.2)]' : (item.color || 'text-blue-400/80')}`}></i>
+                <span className="text-[13px] font-bold uppercase tracking-tight">{item.label}</span>
               </div>
               {item.children && item.children.length > 0 && (
-                <i className={`fa-solid fa-chevron-down text-[9px] transition-transform ${activeItemId === item.id ? 'rotate-180' : ''}`}></i>
+                <i className={`fa-solid fa-chevron-down text-[8px] transition-transform duration-300 ${activeItemId === item.id ? 'rotate-180 opacity-100' : 'opacity-40'}`}></i>
               )}
             </div>
             
             {activeItemId === item.id && item.children && item.children.length > 0 && (
-              <div className="bg-[#1a1e22] py-1 border-l-2 border-cyan-700 ml-4">
+              <div className="bg-black/20 py-1 border-l-2 border-blue-500/50 ml-4 animate-in slide-in-from-left-2 duration-200">
                 {item.children.map(sub => {
                   const mappedSubView = getMappedView(sub.id);
                   const isActive = currentView === mappedSubView && mappedSubView !== 'other';
@@ -196,14 +196,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onNavigate, currentVie
                     <div 
                       key={sub.id} 
                       onClick={(e) => { e.stopPropagation(); handleSubItemClick(sub.id); }}
-                      className={`flex items-center justify-between pl-4 pr-3 py-1.5 text-[12px] hover:text-white hover:bg-[#343a40] cursor-pointer transition-colors ${isActive ? 'text-white bg-[#343a40]' : 'text-gray-400'}`}
+                      className={`flex items-center justify-between pl-4 pr-3 py-1.5 text-[12px] hover:text-white hover:bg-blue-900/30 cursor-pointer transition-all ${isActive ? 'text-white font-bold bg-blue-800/40' : 'text-blue-100/40'}`}
                     >
                       <div className="flex items-center gap-3">
-                        <i className={`fa-solid ${sub.icon} w-4 text-center opacity-80 ${isActive ? 'text-white' : (item.color || 'text-gray-400')}`}></i>
-                        <span>{sub.label}</span>
+                        <i className={`fa-solid ${sub.icon} w-4 text-center opacity-80 ${isActive ? 'text-white' : (item.color || 'text-blue-400/60')}`}></i>
+                        <span className="tracking-tight">{sub.label}</span>
                       </div>
                       {sub.badge && (
-                        <span className="text-[10px] text-gray-200 opacity-60 font-light italic">
+                        <span className="text-[9px] bg-blue-500/80 text-white px-1.5 py-0.5 rounded font-black uppercase tracking-tighter">
                           {sub.badge}
                         </span>
                       )}
@@ -216,14 +216,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onNavigate, currentVie
         ))}
       </nav>
 
-      <div className="p-3 border-t border-gray-700 bg-[#1a1e22]">
+      <div className="p-3 border-t border-blue-900/30 bg-[#0b141e]">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
-            <i className="fa-solid fa-user text-xs"></i>
+          <div className="w-8 h-8 bg-blue-950 rounded-lg flex items-center justify-center border border-blue-800/40 shadow-inner">
+            <i className="fa-solid fa-user text-blue-300 text-xs"></i>
           </div>
           <div className="flex flex-col">
-            <span className="text-xs font-bold text-gray-200">System Admin</span>
-            <span className="text-[10px] text-gray-500">Connected</span>
+            <span className="text-[11px] font-black text-white uppercase tracking-wider">System Admin</span>
+            <div className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="text-[9px] text-blue-400 font-bold uppercase">Online</span>
+            </div>
           </div>
         </div>
       </div>
